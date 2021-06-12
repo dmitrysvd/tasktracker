@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "tasktracker"
+version = "0.1.0"
+description = ""
+authors = ["Dmitry Svobodiannikov <svobodiannikov@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Django = "^3.2.4"
+djangorestframework = "^3.12.4"
+
+[tool.poetry.dev-dependencies]
+pre-commit = "^2.13.0"
+flake8 = "^3.9.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
