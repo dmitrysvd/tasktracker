@@ -47,6 +47,14 @@ class TaskGroup(models.Model):
 
 class Task(models.Model):
     name = models.CharField(verbose_name='Название', max_length=150)
+    task_group = models.ForeignKey(
+        'TaskGroup',
+        verbose_name='Список задач',
+        related_name='tasks',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=False
+    )
     description = models.TextField(verbose_name='Описание')
     due_time = models.DateTimeField(
         verbose_name='Время истечения',
