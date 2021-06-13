@@ -37,6 +37,9 @@ class Role(models.Model):
 class TaskGroup(models.Model):
     name = models.CharField(verbose_name='Название', max_length=150)
 
+    def __str__(self):
+        return f'Список задач "{self.name}"'
+
     class Meta:
         verbose_name = 'Список задач'
         verbose_name_plural = 'Списки задач'
@@ -50,6 +53,9 @@ class Task(models.Model):
         null=True,
         blank=True
     )
+
+    def __str__(self):
+        return f'Задача "{self.name}"'
 
     class Meta:
         verbose_name = 'Задача'
