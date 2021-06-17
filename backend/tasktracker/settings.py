@@ -31,6 +31,7 @@ INSTALLED_APPS = [
 
     'users.apps.UsersConfig',
     'tasks.apps.TasksConfig',
+    'tgbot.apps.TgbotConfig',
 ]
 
 MIDDLEWARE = [
@@ -121,6 +122,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = 'users.User'
+
+
+TELEGRAM_BOT_TOKEN = None
 
 
 from .local_settings import *
