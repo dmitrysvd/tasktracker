@@ -12,5 +12,8 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         mailings = DailyMailing.objects.filter(is_active=True)
         for mailing in mailings:
-            self.stdout.write(f'Отсылаю сообщение пользователю {mailing.user.username}')
+            self.stdout.write((
+                f'Отсылаю сообщение пользователю '
+                f'{mailing.user.username}'
+            ))
             services.send_morning_message_to_user(user=mailing.user)

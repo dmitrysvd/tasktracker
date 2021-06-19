@@ -2,6 +2,26 @@ from django.conf import settings
 from django.db import models
 
 
+class TelegramUser(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name='Системный пользователь',
+        on_delete=models.CASCADE,
+        null=True
+    )
+    chat_id = models.CharField(
+        verbose_name='ID чата с пользователем',
+        max_length=50
+    )
+
+    def __str__(self):
+        return f'Связь пользователя <{self.user.username}> с telegram'
+
+    class Meta:
+        verbose_name = 'Пользователь telegram'
+        verbose_name_plural = 'Пользователи telegram'
+
+
 class DailyMailing(models.Model):
     """Рассылка напоминаний и итогов пользователям."""
     REMINDER_MAILING = 'morning'
@@ -14,7 +34,8 @@ class DailyMailing(models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         verbose_name='Адресат',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        null=True
     )
     mailing_type = models.CharField(
         verbose_name='Тип рассылки',

@@ -1,6 +1,15 @@
 from django.conf import settings
 from django.db import models
 from django.db.models import UniqueConstraint
+from django.utils import timezone
+
+
+class TaskManager(models.Manager):
+    def for_user(self, user):
+        return self.filter(task_group__owner=user)
+
+    def active(self, user):
+        return self.for_user(user=user).filter(due_dt__gt=timezone.now())
 
 
 class Role(models.Model):
@@ -35,6 +44,12 @@ class Role(models.Model):
 
 
 class TaskGroup(models.Model):
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name='Владелец',
+        on_delete=models.CASCADE,
+        null=True,
+    )
     name = models.CharField(verbose_name='Название', max_length=150)
 
     def __str__(self):
@@ -55,12 +70,14 @@ class Task(models.Model):
         null=True,
         blank=False
     )
-    description = models.TextField(verbose_name='Описание')
+    description = models.TextField(verbose_name='Описание', blank=True)
     due_dt = models.DateTimeField(
         verbose_name='Время истечения',
         null=True,
         blank=True
     )
+
+    objects = TaskManager()
 
     def __str__(self):
         return f'Задача "{self.name}"'
