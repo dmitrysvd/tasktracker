@@ -10,6 +10,7 @@ Django = "^3.2.4"
 djangorestframework = "^3.12.4"
 django-cors-headers = "^3.7.0"
 python-telegram-bot = "^13.6"
+celery = "^5.1.0"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^2.13.0"

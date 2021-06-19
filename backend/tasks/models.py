@@ -56,7 +56,7 @@ class Task(models.Model):
         blank=False
     )
     description = models.TextField(verbose_name='Описание')
-    due_time = models.DateTimeField(
+    due_dt = models.DateTimeField(
         verbose_name='Время истечения',
         null=True,
         blank=True

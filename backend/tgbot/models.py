@@ -1,3 +1,35 @@
+from django.conf import settings
 from django.db import models
 
-# Create your models here.
+
+class DailyMailing(models.Model):
+    """Рассылка напоминаний и итогов пользователям."""
+    REMINDER_MAILING = 'morning'
+    FINAL_MAILING = 'evening'
+    MAILING_TYPE_CHOICES = (
+        (REMINDER_MAILING, 'Напоминание'),
+        (FINAL_MAILING, 'Итоговая'),
+    )
+
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        verbose_name='Адресат',
+        on_delete=models.CASCADE
+    )
+    mailing_type = models.CharField(
+        verbose_name='Тип рассылки',
+        choices=MAILING_TYPE_CHOICES,
+        max_length=15
+    )
+    # пока не используется
+    time = models.TimeField(verbose_name='Время рассылки')
+    is_active = models.BooleanField(verbose_name='Активна', blank=True, default=True)
+
+    def __str__(self):
+        return (
+            f'Рассылка "{self.get_mailing_type_display()}" для {self.user.username} '
+        )
+
+    class Meta:
+        verbose_name = 'Ежедневная рассылка'
+        verbose_name_plural = 'Ежедневные рассылки'

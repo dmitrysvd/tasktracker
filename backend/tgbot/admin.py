@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import DailyMailing
 
-# Register your models here.
+
+@admin.register(DailyMailing)
+class DailyMailingAdmin(admin.ModelAdmin):
+    pass
