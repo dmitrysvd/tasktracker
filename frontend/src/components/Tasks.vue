@@ -1,14 +1,16 @@
 <template>
   <h1>Task tracker</h1>
   <h3>Списки задач</h3>
-  <button v-for="taskGroup in taskGroups" :key="taskGroup.name" v-on:click="getTasks(taskGroup.id)">
+  <button class="btn btn-primary" v-for="taskGroup in taskGroups" :key="taskGroup.name" v-on:click="getTasks(taskGroup.id)">
     {{ taskGroup.name }}
   </button>
 
   <h3>Мои задачи</h3>
-  <li v-for="task in tasks" :key="task.name">
-    {{ task.name }}
-  </li>
+  <ul class="list-group">
+    <li class="list-group-item list-group-item-action" v-for="task in tasks" :key="task.name">
+      {{ task.name }}
+    </li>
+  </ul>
 </template>
 
 <script>
