@@ -1,15 +1,12 @@
 <template>
-  <Tasks/>
+  <router-view></router-view>
 </template>
 
 <script>
-import Tasks from './components/Tasks.vue'
-
 export default {
   name: 'App',
   components: {
-    Tasks,
-  }
+  },
 }
 </script>
 

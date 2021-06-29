@@ -8,9 +8,10 @@
   <h3>Мои задачи</h3>
   <ul class="list-group">
     <li class="list-group-item list-group-item-action" v-for="task in tasks" :key="task.name">
-      {{ task.name }}
+      <router-link to='/task'>{{ task.name }}</router-link>
     </li>
   </ul>
+  <router-view></router-view>
 </template>
 
 <script>
